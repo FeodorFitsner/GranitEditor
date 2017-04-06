@@ -3,32 +3,19 @@ branches:
   only:
   - master
 
-# Do not build on tags (GitHub and BitBucket)
-#skip_tags: true
-
-# Start builds on tags only (GitHub and BitBucket)
-#skip_non_tags: true
-
-# Skipping commits with particular message or from specific user
-#skip_commits:
-#  message: /Created.*\.(png|jpg|jpeg|bmp|gif)/      # Regex for matching commit message
-
-# Including commits with particular message or from specific user
-#only_commits:
-#  message: /build/                # Start a new build if message contains 'build'
-
 image: Visual Studio 2017
 
-#environment:
-  #IDE_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE
-
-install:
-  - ps: .\install-vsix-appveyor.ps1
+#install:
+#  - ps: .\install-vsix-appveyor.ps1
 
 configuration:
 - Release
-- Debug
+
 platform: Any CPU
+
+before_build:
+- nuget restore
+
 build:
   verbosity: normal
 
